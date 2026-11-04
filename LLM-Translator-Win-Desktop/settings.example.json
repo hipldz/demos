@@ -1,0 +1,12 @@
+{
+  "settings_version": 2,
+  "theme": "light",
+  "base_url": "https://api.openai.com/v1",
+  "model": "gpt-4o-mini",
+  "replace_method": "paste",
+  "output_mode": "replace",
+  "timeout_seconds": 30,
+  "max_source_chars": 10000,
+  "hotkey_auto": "Ctrl+Shift+X",
+  "start_minimized": false
+}

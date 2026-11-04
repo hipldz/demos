@@ -1,0 +1,7 @@
+# Desktop UI and system tray (Windows only).
+PyQt5>=5.15,<6
+# UI Automation helps with standard controls. Ctrl+C fallback works without it.
+uiautomation>=2.0,<3
+# Windows Credential Manager for encrypted per-user API key storage.
+keyring>=25,<27
+pywin32>=306; sys_platform == "win32"

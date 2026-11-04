@@ -1,0 +1,11 @@
+# Local Python environments and packaging output.
+.venv/
+venv/
+build/
+dist/
+*.spec
+
+# Local settings and logs; keep settings.example.json tracked.
+settings.json
+config.json
+*.log
