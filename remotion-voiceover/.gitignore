@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+/public/narration/
+*.tgz
+*.log
+.DS_Store
+Thumbs.db
