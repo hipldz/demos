@@ -1,5 +1,7 @@
 # 🌐 Vue3 静态个人主页网站项目 - A
 
+[返回项目索引](../README.md)
+
 > 本项目的部分内容参考了 [KilaKila-Blog](https://github.com/zhiyiYo/KilaKila-Blog) 的设计和实现。
 
 ## 📖 项目简介
@@ -146,7 +148,7 @@ node src/scripts/deploy.js
 
 ## 🚀 用这个项目部署 Git
 
-具体的操作 可以等待作者后续更新 参考例子: [https://pldz1.github.io](https://pldz1.github.io)
+具体的操作 可以等待作者后续更新 参考例子: [https://hipldz.github.io](https://hipldz.github.io)
 
 1. 创建一个 Git Page 的代码仓库: [creating-a-github-pages-site](https://docs.github.com/zh/pages/getting-started-with-github-pages/creating-a-github-pages-site)
 

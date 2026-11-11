@@ -1,5 +1,7 @@
 # pproxy Manager
 
+[返回项目索引](../README.md)
+
 A lightweight Python web application for managing and monitoring multiple [pproxy](https://github.com/qwj/python-proxy) forwarding rules. Browser-based UI, structured access logging, and real-time process monitoring.
 
 ![preview](./doc/preview.gif)

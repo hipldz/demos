@@ -1,5 +1,7 @@
 # AI Agent Demo
 
+[返回项目索引](../README.md)
+
 本项目实现一个**单 Agent 架构**的“可扩展、多模态 AI Agent”，使用 **JavaScript（Node.js / ES Modules）**，并严格按照分层架构组织代码：
 
 - **Agent Core**

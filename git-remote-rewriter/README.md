@@ -1,5 +1,7 @@
 # Git Remote Rewriter
 
+[返回项目索引](../README.md)
+
 一个简单的 Bash 工具，用于批量修改**当前目录下一层 Git 仓库**中 `@github.com/` 前的 Remote 用户名或认证前缀。
 
 它会自动扫描：
@@ -11,13 +13,13 @@
 并找出类似：
 
 ```text
-https://old-user@github.com/pldz1/repository.git
+https://old-user@github.com/hipldz/repository.git
 ```
 
 中的 `old-user`，然后让你输入新的 Remote 用户名，批量替换为：
 
 ```text
-https://new-user@github.com/pldz1/repository.git
+https://new-user@github.com/hipldz/repository.git
 ```
 
 脚本只处理 `github.com`，不会修改 `gitee.com`、`gitlab.com` 或其他 Git 服务。
@@ -128,14 +130,14 @@ new-user
 
 ```ini
 [remote "origin"]
-    url = https://old-token@github.com/pldz1/example.git
+    url = https://old-token@github.com/hipldz/example.git
 ```
 
 修改后：
 
 ```ini
 [remote "origin"]
-    url = https://new-token@github.com/pldz1/example.git
+    url = https://new-token@github.com/hipldz/example.git
 ```
 
 GitHub Owner 和仓库名称都不会变化。
@@ -143,14 +145,14 @@ GitHub Owner 和仓库名称都不会变化。
 即：
 
 ```text
-https://old-token@github.com/pldz1/example.git
+https://old-token@github.com/hipldz/example.git
          ^^^^^^^^^
 ```
 
 只修改 `@github.com/` 前的 Remote 用户名：
 
 ```text
-https://new-token@github.com/pldz1/example.git
+https://new-token@github.com/hipldz/example.git
          ^^^^^^^^^
 ```
 
@@ -159,9 +161,9 @@ https://new-token@github.com/pldz1/example.git
 如果当前目录中存在：
 
 ```text
-https://token-a@github.com/pldz1/repo-a.git
-https://token-b@github.com/pldz1/repo-b.git
-https://old-token@github.com/pldz1/repo-c.git
+https://token-a@github.com/hipldz/repo-a.git
+https://token-b@github.com/hipldz/repo-b.git
+https://old-token@github.com/hipldz/repo-c.git
 ```
 
 脚本会自动发现：
@@ -181,9 +183,9 @@ new-token
 最终会变成：
 
 ```text
-https://new-token@github.com/pldz1/repo-a.git
-https://new-token@github.com/pldz1/repo-b.git
-https://new-token@github.com/pldz1/repo-c.git
+https://new-token@github.com/hipldz/repo-a.git
+https://new-token@github.com/hipldz/repo-b.git
+https://new-token@github.com/hipldz/repo-c.git
 ```
 
 ---

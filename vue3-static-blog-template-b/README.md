@@ -1,20 +1,19 @@
-# 🌐 Vue3 静态个人主页网站项目 - A
+# 🌐 Vue3 静态个人主页网站项目 - B
+
+[返回项目索引](../README.md)
 
 > 本项目的部分内容参考了 [KilaKila-Blog](https://github.com/zhiyiYo/KilaKila-Blog) 的设计和实现。
 
 ## 📖 项目简介
 
-这是一个基于 Vue3 的项目, 用于部署静态的个人主页网站。
+这是一个基于 Vue 3 和 Vite 的项目，用于部署静态的个人主页网站。
 
-项目的预览地址: [vue3-static-blog-template-a](https://pldz1.com/io/vue3-static-blog-template-a)
+与 [Vue CLI 版本 A](../vue3-static-blog-template-a/README.md) 相比，本版本使用 Vite，并通过 `VITE_` 前缀配置环境变量。
 
 ## 🛠️ 技术要求
 
-- **Node.js 版本支持**：
-  - 推荐使用 **Node.js 16**。
-  - 本项目对 Node.js **17 及以上版本**, 需要额外设置环境变量:
-    - windows: `set NODE_OPTIONS=--openssl-legacy-provider`
-    - linux: `export NODE_OPTIONS=--openssl-legacy-provider`
+- Node.js 和 npm，Node.js 版本需满足实际安装的 Vite 6 的引擎要求。
+- 本版本使用 Vite，启动命令仍为 `npm run serve`。
 
 ---
 
@@ -27,33 +26,45 @@
 ├── _pics/               # 存放博客的图像资源
 ├── dist/                # 个人网站部署文件夹
 ├── public/              # 公共资源文件夹
-│   ├── _blogs/          # 存放博客内容的文件夹, 脚本会帮助从 resources/ 下同步并且加密过来
-│   ├── _pics/           # 存放博客的图像资源, 脚本会帮助从 resources/ 下同步并且加密过来
-│   ├── _lib/            # 库文件夹
-|   ├── all.blog.json    # 博客元数据文件, 脚本会帮助从 public/all.blog.json 下同步并且加密过来
-│   ├── avatar.png       # 默认头像图片
-│   ├── favicon.ico      # 网站图标
-│   └── index.html       # 网站入口 HTML
+│   ├── _blogs/          # 从根目录 _blogs 同步，可选加密
+│   ├── _pics/           # 从根目录 _pics 同步的图像资源
+│   └── all.blog.json    # 由脚本生成，可选加密的博客元数据
 ├── src/                 # 项目源码
-├── .env                 # 环境变量和用户信息的配置文件
+├── index.html           # Vite HTML 入口
+├── vite.config.js       # 开发服务、路径别名和资源路径配置
+└── .env                 # 需自行创建的环境变量配置
 ```
 
 ---
 
 ## ⚙️ 环境变量配置
 
-项目中的 `.env` 文件包含以下配置项, 用于设置网站的基本信息和功能：
+在项目根目录创建 `.env`，包含以下配置项, 用于设置网站的基本信息和功能：
 
 | 变量名                          | 说明                                                 |
 | ------------------------------- | ---------------------------------------------------- |
-| `VUE_APP_WEBSITE_NAME`          | 网站的显示名字                                       |
-| `VUE_APP_WEB_START_TIME`        | 网站的启动时间                                       |
-| `VUE_APP_WEBSITE_AUTHOR_GITHUB` | 网站作者的 GitHub 链接                               |
-| `VUE_APP_WEBSITE_AUTHOR_CSDN`   | 网站作者的 CSDN 链接                                 |
-| `VUE_APP_WEBSITE_AUTHOR_JUEJIN` | 网站作者的稀土掘金链接                               |
-| `VUE_APP_ENCRYPT_SOURCE`        | 是否对网站的一些源文件信息进行简单加密               |
-| `VUE_APP_SECRET_KEY`            | 加密和解密使用的密钥（32 字节, 符合 AES-256 的要求） |
-| `VUE_APP_ALGORITHM`             | 使用的加密算法（例如 `aes-256-cbc`）                 |
+| `VITE_WEBSITE_NAME`          | 网站的显示名字                                       |
+| `VITE_WEB_START_TIME`        | 网站的启动时间                                       |
+| `VITE_WEBSITE_AUTHOR_NAME`  | 网站作者的显示名字                                   |
+| `VITE_WEBSITE_AUTHOR_GITHUB` | 网站作者的 GitHub 链接                               |
+| `VITE_WEBSITE_AUTHOR_CSDN`   | 网站作者的 CSDN 链接                                 |
+| `VITE_WEBSITE_AUTHOR_JUEJIN` | 网站作者的稀土掘金链接                               |
+| `VITE_WEBSITE_AUTHOR_GITEE` | 网站作者的 Gitee 链接                                 |
+| `VITE_ENCRYPT_SOURCE`        | 是否对网站的一些源文件信息进行简单加密               |
+| `VITE_SECRET_KEY`            | 加密和解密使用的密钥（32 字节, 符合 AES-256 的要求） |
+| `VITE_ALGORITHM`             | 使用的加密算法（例如 `aes-256-cbc`）                 |
+
+最小配置示例：
+
+```dotenv
+VITE_WEBSITE_NAME=My Blog
+VITE_WEB_START_TIME=2026/01/01
+VITE_WEBSITE_AUTHOR_NAME=hipldz
+VITE_WEBSITE_AUTHOR_GITHUB=https://github.com/hipldz
+VITE_ENCRYPT_SOURCE=false
+```
+
+`VITE_ENCRYPT_SOURCE` 需要明确设置为 `true` 或 `false`，资源处理脚本据此选择分支。启用加密时还需配置密钥与算法；前端解密使用 AES-CBC，应与 `aes-256-cbc` 保持一致。`serve` 和 `build` 都会先执行 `npm run update`，更新 `public/` 下的生成资源。
 
 ---
 
@@ -108,7 +119,7 @@ summary: 无
 
 ## 📝 运行项目
 
-1. 确保安装了推荐版本的 Node.js（Node 16）。
+1. 安装满足项目依赖要求的 Node.js，并先配置本目录的 `.env`。
 2. 执行以下命令：
 
 ```bash
@@ -122,7 +133,7 @@ npm run serve
 npm run build
 ```
 
-3. 项目将在本地运行, 并可以通过浏览器访问。
+3. 开发服务默认监听 `http://127.0.0.1:10100/`，实际地址以终端输出为准。
 
 4. 可以单独测试的脚本有：
 
@@ -146,7 +157,7 @@ node src/scripts/deploy.js
 
 ## 🚀 用这个项目部署 Git
 
-具体的操作 可以等待作者后续更新 参考例子: [https://pldz1.github.io](https://pldz1.github.io)
+具体的操作 可以等待作者后续更新 参考例子: [https://hipldz.github.io](https://hipldz.github.io)
 
 1. 创建一个 Git Page 的代码仓库: [creating-a-github-pages-site](https://docs.github.com/zh/pages/getting-started-with-github-pages/creating-a-github-pages-site)
 

@@ -1,0 +1,36 @@
+{
+  "name": "pi-port-proxy",
+  "version": "0.0.4",
+  "description": "A localhost port dashboard and reverse proxy for Pi, WSL2, Linux, and Termux.",
+  "type": "module",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "reverse-proxy",
+    "termux",
+    "wsl",
+    "ports"
+  ],
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./src/extension.ts"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3"
+  }
+}

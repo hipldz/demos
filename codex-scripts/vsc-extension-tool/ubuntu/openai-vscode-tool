@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Generic launcher for tools bundled inside the OpenAI ChatGPT VS Code extension.
+#
+# Example symlinks:
+#   ~/.local/bin/codex                -> ~/.local/libexec/openai-vscode-tool
+#   ~/.local/bin/rg                   -> ~/.local/libexec/openai-vscode-tool
+#   ~/.local/bin/codex-code-mode-host -> ~/.local/libexec/openai-vscode-tool
+
+APP_NAME="$(basename "$0")"
+
+# Prefer VS Code Server (Remote/WSL/SSH), then local VS Code.
+SEARCH_ROOTS=(
+  "$HOME/.vscode/extensions"
+)
+
+DIR_PATTERN='openai.chatgpt-*'
+BIN_REL_DIR='bin/linux-x86_64'
+
+best_app=''
+best_mtime=-1
+
+for root in "${SEARCH_ROOTS[@]}"; do
+  [[ -d "$root" ]] || continue
+
+  while IFS= read -r -d '' dir; do
+    candidate="$dir/$BIN_REL_DIR/$APP_NAME"
+    [[ -x "$candidate" ]] || continue
+
+    # Pick the newest matching extension directory by modification time.
+    mtime="$(stat -c '%Y' "$dir" 2>/dev/null || printf '0')"
+
+    if (( mtime > best_mtime )); then
+      best_mtime="$mtime"
+      best_app="$candidate"
+    fi
+  done < <(
+    find "$root" \
+      -mindepth 1 \
+      -maxdepth 1 \
+      -type d \
+      -name "$DIR_PATTERN" \
+      -print0 2>/dev/null
+  )
+done
+
+if [[ -z "$best_app" ]]; then
+  {
+    echo "[ERROR] $APP_NAME executable was not found."
+    echo "Looked under:"
+    for root in "${SEARCH_ROOTS[@]}"; do
+      echo "  $root/$DIR_PATTERN/$BIN_REL_DIR/$APP_NAME"
+    done
+  } >&2
+  exit 127
+fi
+
+exec "$best_app" "$@"
